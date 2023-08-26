@@ -1,0 +1,17 @@
+version: '3.8'
+
+# image postgres should only be used for dev. For prod, we should use bitnami images
+# volumes -> This will allow us to persist a folder in our local machine so if this container "dies", we can keep the data of this container
+services:
+  postgres:
+    container_name: nest-clean-pg
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: nest-clean
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
